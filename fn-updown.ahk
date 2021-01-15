@@ -22,6 +22,14 @@ return
 send time:%A_YYYY%-%A_MM%-%A_DD%   %A_Hour%:%A_Min%:%A_Sec%
 return
 
+Control & Left::
+send {Home}
+return
+
+Control & Right::
+send {End}
+return
+
 
 #IfWinActive, ahk_exe sourceinsight4.exe
 #/::
@@ -30,7 +38,7 @@ Send {Left}
 Send {Left}
 return
 
-::!!fun::
+::!!fun::	;函数的功能说明模板
 send /***********************************************
 send ,{Enter}
 Send *fun	:
@@ -63,32 +71,70 @@ WinWaitActive,Font,,2
 Send tahoma{enter}
 return
 
-
+::head::
 :*:/head::
 ;sleep 20
 ;send , {BackSpace}
 ::#::
 LControl & /::
-Sleep 300
-Send, ^d
-;WinWaitActive,Font,,2
-sleep 200
-Send {tab}{tab}15{enter}
+;Sleep 100
+;Send, ^d
+;sleep 300
+;Send {tab}
+;sleep 50
+;Send {tab}
+;sleep 50
+;Send 15
+;sleep 50
+;Send {enter}
+MouseGetPos xpos,ypos
+sleep 5
+MouseClick,,780,270
+sleep 100
+MouseClick,,742,413	;11
+sleep 10
+MouseMove,xpos,ypos
 return
 
 
+::txt::
 :*:/txt::
 RControl & /::
 ^`::
-Send, ^d
+;Send, ^d
 ;WinWaitActive,Font,,2
-sleep 300
-Send {tab}{tab}11{enter}
+;sleep 300
+;sleep 300
+;Send {tab}
+;sleep 50
+;Send {tab}
+;sleep 50
+;Send 11
+;sleep 50
+;Send {enter}
+MouseGetPos xpos,ypos
+sleep 5
+MouseClick,,780,270
+sleep 100
+MouseClick,,742,368	;11
+sleep 10
+MouseMove,xpos,ypos
 return
 
+
+
+
+return
+
+::ch::
 :*:/ch::
+^h::
+sleep 20
 Send, ^+h
+sleep 200
 Send,^b
+sleep 20
+send,{space}
 return
 
 
@@ -115,6 +161,8 @@ MouseClick,,820,263
 sleep 10
 MouseClick,,834,317	;default color
 MouseMove,xpos,ypos
+sleep 20
+send,{space}
 return
 
 :*:/cr::
@@ -124,6 +172,8 @@ Sleep 5
 MouseClick,,820,263
 Sleep 10
 MouseClick,,1030,392	;red
+sleep 20
+send,{space}
 MouseMove,xpos,ypos
 
 
