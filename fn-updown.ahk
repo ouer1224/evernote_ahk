@@ -7,6 +7,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;;Send {Down}   ;;输入 上 键
 ;;return
 
+;#Include spaceFun.ahk
+#Include evernoteeditor.ahk
 
 #n::
 Run Notepad
@@ -22,16 +24,22 @@ return
 send time:%A_YYYY%-%A_MM%-%A_DD%   %A_Hour%:%A_Min%:%A_Sec%
 return
 
-Control & Left::
-send {Home}
-return
+;Control & Left::
+;send {Home}
+;return
 
-Control & Right::
-send {End}
-return
+;Control & Right::
+;send {End}
+;return
 
 
-#IfWinActive, ahk_exe sourceinsight4.exe
+
+
+
+
+
+
+#IfWinActive, ahk_exe notepad++.exe
 #/::
 Send /**/
 Send {Left}
@@ -50,8 +58,48 @@ send ,{Enter}
 send *return	:
 send ,{Enter}
 send ************************************************/
+send ,{Enter}
 
 return 
+
+
+
+
+Ctrl & Down::
+send,{PgDn}
+return
+
+
+#IfWinActive
+
+#IfWinActive, ahk_exe sourceinsight4.exe 
+#/::
+Send /**/
+Send {Left}
+Send {Left}
+return
+
+::!!fun::	;函数的功能说明模板
+send /***********************************************
+send ,{Enter}
+Send *fun	:
+send ,{Enter}
+send *name	:
+send , {Enter}
+send *var	:
+send ,{Enter}
+send *return	:
+send ,{Enter}
+send ************************************************/
+send ,{Enter}
+
+return 
+
+return
+
+
+
+
 
 #IfWinActive
 
@@ -71,12 +119,15 @@ WinWaitActive,Font,,2
 Send tahoma{enter}
 return
 
-::head::
+global zhead:=0		;;用于切换head 和txt的标志
+
+::zh::
 :*:/head::
 ;sleep 20
 ;send , {BackSpace}
 ::#::
 LControl & /::
+zhead:=0
 ;Sleep 100
 ;Send, ^d
 ;sleep 300
@@ -97,26 +148,25 @@ MouseMove,xpos,ypos
 return
 
 
-::txt::
+
+::zt::
 :*:/txt::
 RControl & /::
 ^`::
-;Send, ^d
-;WinWaitActive,Font,,2
-;sleep 300
-;sleep 300
-;Send {tab}
-;sleep 50
-;Send {tab}
-;sleep 50
-;Send 11
-;sleep 50
-;Send {enter}
 MouseGetPos xpos,ypos
 sleep 5
 MouseClick,,780,270
 sleep 100
-MouseClick,,742,368	;11
+if zhead=0
+{
+	zhead:=1
+	MouseClick,,742,368	;11
+}
+else
+{
+	zhead:=0
+	MouseClick,,742,413	;14
+}
 sleep 10
 MouseMove,xpos,ypos
 return
@@ -124,7 +174,7 @@ return
 
 
 
-return
+
 
 ::ch::
 :*:/ch::
@@ -134,7 +184,7 @@ Send, ^+h
 sleep 200
 Send,^b
 sleep 20
-send,{space}
+;send,{space}
 return
 
 
@@ -190,13 +240,13 @@ return
 Send, ^+m
 return 
 
-::!::
+
 ^]::
 Send, ^m
 return 
 
 
-LControl & q::
+LControl & p::
 MouseGetPos xpos,ypos
 MsgBox %xpos%   %ypos%
 return 
