@@ -8,7 +8,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;;return
 
 ;#Include spaceFun.ahk
-#Include evernoteeditor.ahk
+
+#Include D:\ouer\autohotkey\evernoteeditor.ahk
 
 #n::
 Run Notepad
@@ -204,7 +205,7 @@ MouseMove,xpos,ypos
 return
 
 :*:/cb::
-LControl & 1::
+LControl & q::
 MouseGetPos xpos,ypos
 sleep 5
 MouseClick,,820,263
@@ -216,7 +217,7 @@ send,{space}
 return
 
 :*:/cr::
-LControl & 2::
+LControl & w::
 MouseGetPos xpos,ypos
 Sleep 5
 MouseClick,,820,263

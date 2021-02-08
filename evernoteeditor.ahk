@@ -152,12 +152,11 @@
 		!f::evernoteEdit("<div style='margin-top: 5px; margin-bottom: 9px; word-wrap: break-word; padding: 8.5px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(245, 245, 245); border: 1px solid rgba(0, 0, 0, 0.148438)'>", "</div></br>")
 		;常规标题设置
 		!1::
-        evernoteEditText("<h1 style='font-family:黑体;margin: 10px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:26px;color:#b45b3e;'>","</h1>")
+        evernoteEditText("<h1 style='font-family:黑体;margin: 10px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:22px;color:#b45b3e;'>","</h1>")
         return
         
-        
-		!2::evernoteEditText("<h2 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:22px;color:#b45b3e;'>","</h1>")
-		!3::evernoteEditText("<h3 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:18px;color:#b45b3e;'>","</h1>")
+		!2::evernoteEditText("<h2 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:18px;color:#b45b3e;'>","</h1>")
+		!3::evernoteEditText("<h3 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:14px;color:#b45b3e;'>","</h1>")
 		;引用
 		!s::evernoteEdit("<div style='margin:0.8em 0px; line-height:1.5em; border-left-width:5px; border-left-style:solid; border-left-color:rgb(127, 192, 66); padding-left:1.5em; '>", "</div>")
 
@@ -177,9 +176,41 @@
 		;v6下用evernoteEditText()回帖，前面都会多一个空格，无解。但删除一下也不麻烦，聊胜于无吧
 		;背景色黄色
 		;虚线
-		^1::evernoteEdit("<blockquote style='width: 100%;color: #8b8b8b;margin: 15px auto;padding: 10px;clear: both;border: 2px dashed #ddd;background: #f9f9f9;'>", "</blockquote>")
+		^1::
+        tmpflag:=1
         
-		^3::
+        clipboard =   ; 清空剪贴板
+        nulltext=
+        clipboard= %clipboard%
+        send ^c
+        ClipWait ,0.1,1
+        if(clipboard=nulltext)
+        {
+            tmpflag=0
+        }
+        else
+        {
+            tmpflag=1
+        }
+        
+        if(tmpflag==1)
+        {
+          ToolTip ,clear Format
+        evernoteEdit("<blockquote style='width: 100%;color: #8b8b8b;margin: 15px auto;padding: 10px;clear: both;border: 2px dashed #ddd;background: #f9f9f9;'>", "</blockquote>")
+        sleep 500
+        ToolTip
+        }
+        else
+        {
+          evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
+          send {Right}
+          sleep 200
+          send {BackSpace}{BackSpace}
+        }
+
+        return 
+        
+		^4::
         evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
         return
 		;背景色蓝色
@@ -187,7 +218,7 @@
 		evernoteEditText("<span style='background: #ADD8E6;'>", "</span>")
         return 
 		;背景色灰色
-        ^4::
+        ^3::
 		evernoteEditText("<span style='background: #D3D3D3;'>", "</span>")
         return
 		;背景色绿色
