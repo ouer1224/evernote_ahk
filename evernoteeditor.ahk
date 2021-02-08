@@ -41,15 +41,42 @@
 	;evernote不保留原格式，增强函数
 	evernoteEditText(eFoward, eEnd)
 	{
-		clipboard =
-		Send ^c
-		ClipWait, 1
-		t := WinClip.GetText()
+      
+        flag:=0
+        clipboard =   ; 清空剪贴板
+        nulltext=
+        send ^c
+        ClipWait ,0.1,1
+        if(clipboard=nulltext)
+        {
+          flag:=0
+        txttmp:="##"
+        Clipboard:=txttmp
+        }
+        else
+        {
+          flag:=1
+        }
+
+		;clipboard =
+		;Send ^c
+		;ClipWait, 1
+		;t := WinClip.GetText()
+        t:=Clipboard
+        ToolTip , t=%t%
 		html = %eFoward%%t%%eEnd%
+        ToolTip ,html=%html%
 		WinClip.Clear()
 		WinClip.SetHTML(html)
 		Sleep, 300
 		Send ^v
+        Sleep, 100
+        if(flag==0)
+        {
+            send {Left}
+        }   
+        ;Sleep, 2000
+        ToolTip
 		Return
 	}
 	
@@ -121,7 +148,11 @@
 		;方框环绕
 		!f::evernoteEdit("<div style='margin-top: 5px; margin-bottom: 9px; word-wrap: break-word; padding: 8.5px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(245, 245, 245); border: 1px solid rgba(0, 0, 0, 0.148438)'>", "</div></br>")
 		;常规标题设置
-		!1::evernoteEditText("<h1 style='font-family:黑体;margin: 10px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:26px;color:#b45b3e;'>","</h1>")
+		!1::
+        evernoteEditText("<h1 style='font-family:黑体;margin: 10px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:26px;color:#b45b3e;'>","</h1>")
+        return
+        
+        
 		!2::evernoteEditText("<h2 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:22px;color:#b45b3e;'>","</h1>")
 		!3::evernoteEditText("<h3 style='font-family:黑体;margin: 6px 0 10px;padding: 0;font-weight: 700;cursor: text;position: relative;color:#2f2f2f;font-size:18px;color:#b45b3e;'>","</h1>")
 		;引用
@@ -144,13 +175,28 @@
 		
 		;v6下用evernoteEditText()回帖，前面都会多一个空格，无解。但删除一下也不麻烦，聊胜于无吧
 		;背景色黄色
-		^!1::evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
+        ^1::
+          evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
+          Sleep 50
+          send {left}
+          Sleep 50
+          send {Delete}{Delete}
+        return 
+		^2::
+        ^!2::evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
+        return
 		;背景色蓝色
-		^!2::evernoteEditText("<span style='background: #ADD8E6;'>", "</span>")
+        ^3::
+		^!3::evernoteEditText("<span style='background: #ADD8E6;'>", "</span>")
+        return 
 		;背景色灰色
-		^!3::evernoteEditText("<span style='background: #D3D3D3;'>", "</span>")
+        ^4::
+		^!4::evernoteEditText("<span style='background: #D3D3D3;'>", "</span>")
+        return
 		;背景色绿色
-		^!4::evernoteEditText("<span style='background: #90EE90;'>", "</span>")
+        ^5::
+		^!5::evernoteEditText("<span style='background: #90EE90;'>", "</span>")
+        return
 		
 		;字体红色
 		;!+1::evernoteEditText("<span style='color: #F02E37;'><b>", "</b></span>")
