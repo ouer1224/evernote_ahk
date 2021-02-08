@@ -29,11 +29,13 @@
 		clipboard =
 		Send ^c
 		ClipWait, 1
-		t := WinClip.GetHtml3()
+		;t := WinClip.GetHtml3()
+        t=%clipboard%
 		html = %eFoward%%t%%eEnd%
+        ;MsgBox ef=%eFoward%  `r`nend=%eEnd%  `r`nhtml=%html%  `r`nt=%t%
 		WinClip.Clear()
 		WinClip.SetHTML(html)
-		Sleep, 300
+		Sleep, 200
 		Send ^v
 		Return
 	}
@@ -78,6 +80,7 @@
         ;Sleep, 2000
         ToolTip
 		Return
+        
 	}
 	
 	;evernote无原文本的插入html增强函数
@@ -162,40 +165,34 @@
 		!g::evernoteEditText(setLink(),"</a>")
 		;超级标题
 		!a::evernoteEdit("<div style='margin:1px 0px; color:rgb(255, 255, 255); background-color:#8BAAD0; border-top-left-radius:5px; border-top-right-radius:5px; border-bottom-right-radius:5px; border-bottom-left-radius:5px; text-align:center;'><b>", "</b></div></br>")
-		;虚线
-		!d::evernoteEdit("<blockquote style='width: 100%;color: #8b8b8b;margin: 15px auto;padding: 10px;clear: both;border: 2px dashed #ddd;background: #f9f9f9;'>", "</blockquote>")
 		;红框框
-		!q::evernoteEdit("<div style='color: #c66;background: #ffecea -1px -1px no-repeat;border: 1px solid #ebb1b1;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>")
+		!w::evernoteEdit("<div style='color: #c66;background: #ffecea -1px -1px no-repeat;border: 1px solid #ebb1b1;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>")
 		;黄框框
-		!w::evernoteEdit("<div style='color: #ad9948;background: #fff4b9 -1px -1px no-repeat;border: 1px solid #eac946;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
+		!e::evernoteEdit("<div style='color: #ad9948;background: #fff4b9 -1px -1px no-repeat;border: 1px solid #eac946;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
 		;灰框框
-		!e::evernoteEdit("<div style='color: #777;background: #eaeaea -1px -1px no-repeat;border: 1px solid #ccc;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
+		!r::evernoteEdit("<div style='color: #777;background: #eaeaea -1px -1px no-repeat;border: 1px solid #ccc;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
 		;绿框框
-		!r::evernoteEdit("<div style='color: #7da33c;background: #ecf2d6 -1px -1px no-repeat;border: 1px solid #aac66d;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
+		!t::evernoteEdit("<div style='color: #7da33c;background: #ecf2d6 -1px -1px no-repeat;border: 1px solid #aac66d;overflow: hidden;margin: 10px 0;padding: 15px 15px 15px 15px;'>", "</div>" )
 		
 		;v6下用evernoteEditText()回帖，前面都会多一个空格，无解。但删除一下也不麻烦，聊胜于无吧
 		;背景色黄色
-        ^1::
-          evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
-          Sleep 50
-          send {left}
-          Sleep 50
-          send {Delete}{Delete}
-        return 
-		^2::
-        ^!2::evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
+		;虚线
+		^1::evernoteEdit("<blockquote style='width: 100%;color: #8b8b8b;margin: 15px auto;padding: 10px;clear: both;border: 2px dashed #ddd;background: #f9f9f9;'>", "</blockquote>")
+        
+		^3::
+        evernoteEditText("<span style='background: #FFFAA5;'>", "</span>")
         return
 		;背景色蓝色
-        ^3::
-		^!3::evernoteEditText("<span style='background: #ADD8E6;'>", "</span>")
+        ^2::
+		evernoteEditText("<span style='background: #ADD8E6;'>", "</span>")
         return 
 		;背景色灰色
         ^4::
-		^!4::evernoteEditText("<span style='background: #D3D3D3;'>", "</span>")
+		evernoteEditText("<span style='background: #D3D3D3;'>", "</span>")
         return
 		;背景色绿色
         ^5::
-		^!5::evernoteEditText("<span style='background: #90EE90;'>", "</span>")
+		evernoteEditText("<span style='background: #90EE90;'>", "</span>")
         return
 		
 		;字体红色
@@ -456,7 +453,7 @@ class WinClipAPI extends WinClip_base
   StrSplit(str,delim,omit = "") {
     if (strlen(delim) > 1)
     {
-      StringReplace,str,str,% delim,ƒ,1 		;■¶╬
+      StringReplace,str,str,% delim,ƒ,1 		;
       delim = ƒ
     }
     ra := Array()
