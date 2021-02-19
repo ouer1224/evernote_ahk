@@ -40,26 +40,28 @@ return
 
 
 
-#IfWinActive, ahk_exe notepad++.exe
+#IfWinActive, ahk_exe uedit32.exe  ;notepad++.exe 
+#IfWinActive, ahk_exe uedit32.exe
 #/::
 Send /**/
 Send {Left}
 Send {Left}
+Send ^{Space}
 return
 
 ::!!fun::	;函数的功能说明模板
 send /***********************************************
 send ,{Enter}
-Send *fun	:
+Send *fun     :
 send ,{Enter}
-send *name	:
+send *name    :
 send , {Enter}
-send *var	:
+send *var     :
 send ,{Enter}
-send *return	:
+send *return  :
 send ,{Enter}
 send ************************************************/
-send ,{Enter}
+send ,{Up}{Up}{Up}{Up}
 
 return 
 
@@ -95,9 +97,6 @@ send ************************************************/
 send ,{Enter}
 
 return 
-
-return
-
 
 
 
@@ -178,7 +177,6 @@ return
 
 
 ::ch::
-:*:/ch::
 ^h::
 sleep 20
 Send, ^+h
@@ -190,12 +188,12 @@ return
 
 
 ;::@::
-:*:/code::
+::/code::
 Sleep 20
 Send, ^+l
 return
 
-:*:/excel::
+::/excel::
 MouseGetPos xpos,ypos
 sleep 5
 MouseClick,,1473,266
@@ -204,36 +202,62 @@ MouseClick,,1500,363	;1*2的表格
 MouseMove,xpos,ypos
 return
 
-:*:/cb::
+::/cb::
 LControl & q::
 MouseGetPos xpos,ypos
-sleep 5
+sleep 50
 MouseClick,,820,263
-sleep 10
+sleep 100
 MouseClick,,834,317	;default color
 MouseMove,xpos,ypos
-sleep 20
-send,{space}
+sleep 200
+;send,{space}
 return
 
-:*:/cr::
+
+
+::/cz::
 LControl & w::
 MouseGetPos xpos,ypos
-Sleep 5
+Sleep 50
 MouseClick,,820,263
-Sleep 10
-MouseClick,,1030,392	;red
-sleep 20
-send,{space}
-MouseMove,xpos,ypos
-
-
-^9::
-Send, ^d
-;WinWaitActive,Font,,2
+Sleep 100
+MouseClick,,930,465	;zise
 sleep 200
-Send {tab}{tab}13{enter}
-return
+;send,{space}
+MouseMove,xpos,ypos
+return 
+
+::/cg::
+LControl & e::
+MouseGetPos xpos,ypos
+Sleep 50
+MouseClick,,820,263
+Sleep 100
+MouseClick,,1138,460	;green
+sleep 200
+;send,{space}
+MouseMove,xpos,ypos
+return 
+
+::/cr::
+LControl & r::
+MouseGetPos xpos,ypos
+Sleep 50
+MouseClick,,820,263
+Sleep 100
+MouseClick,,1030,392	;red
+sleep 200
+;send,{space}
+MouseMove,xpos,ypos
+return 
+
+;^9::
+;Send, ^d
+;WinWaitActive,Font,,2
+;sleep 200
+;Send {tab}{tab}13{enter}
+;return
 
 
 
