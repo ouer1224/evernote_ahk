@@ -216,15 +216,20 @@ return
 
 
 
-::/cz::
+::/cq::
 LControl & w::
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
 Sleep 100
-MouseClick,,930,465	;zise
+MouseClick,,858,536	;qingse
 sleep 200
-;send,{space}
+Send,{Tab}
+sleep 50
+send,{space}
+Sleep 50
+send,{Enter}
+Sleep 50
 MouseMove,xpos,ypos
 return 
 
