@@ -40,8 +40,8 @@ return
 
 
 
-#IfWinActive, ahk_exe uedit32.exe  ;notepad++.exe 
-#IfWinActive, ahk_exe uedit32.exe
+;#IfWinActive, ahk_exe uedit32.exe  ;notepad++.exe 
+;#IfWinActive, ahk_exe uedit32.exe
 #/::
 Send /**/
 Send {Left}
@@ -73,8 +73,8 @@ send,{PgDn}
 return
 
 
-#IfWinActive
 
+/*
 #IfWinActive, ahk_exe sourceinsight4.exe 
 #/::
 Send /**/
@@ -98,11 +98,9 @@ send ,{Enter}
 
 return 
 
-
-
-
 #IfWinActive
 
+*/
 
 ;#'::
 ;Send '''
@@ -204,6 +202,7 @@ return
 
 ::/cb::
 LControl & q::
+ToolTip,黑色,A_CaretX,A_CaretY-20
 MouseGetPos xpos,ypos
 sleep 50
 MouseClick,,820,263
@@ -212,29 +211,31 @@ MouseClick,,834,317	;default color
 MouseMove,xpos,ypos
 sleep 200
 ;send,{space}
+ToolTip
 return
 
 
 
 ::/cq::
 LControl & w::
+ToolTip,青色,A_CaretX,A_CaretY-20
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
 Sleep 100
 MouseClick,,858,536	;qingse
-sleep 200
-Send,{Tab}
-sleep 50
-send,{space}
-Sleep 50
-send,{Enter}
-Sleep 50
+sleep 100
+MouseClick,,198,238
+Sleep 100
+Send,{Enter}
+sleep 100
 MouseMove,xpos,ypos
+ToolTip
 return 
 
 ::/cg::
 LControl & e::
+ToolTip,绿色,A_CaretX,A_CaretY-20
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
@@ -243,18 +244,21 @@ MouseClick,,1138,460	;green
 sleep 200
 ;send,{space}
 MouseMove,xpos,ypos
+ToolTip
 return 
 
 ::/cr::
 LControl & r::
+ToolTip,红色,A_CaretX,A_CaretY-20
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
 Sleep 100
-MouseClick,,1030,392	;red
+MouseClick,,1030,499	;red
 sleep 200
 ;send,{space}
 MouseMove,xpos,ypos
+ToolTip
 return 
 
 ;^9::

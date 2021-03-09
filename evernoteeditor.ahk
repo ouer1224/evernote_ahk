@@ -1,5 +1,5 @@
 ﻿#SingleInstance Force
-#NoTrayIcon
+;#NoTrayIcon
 
 {
 	#NoEnv						;不检查空变量是否为环境变量
