@@ -118,6 +118,7 @@ Send tahoma{enter}
 return
 
 global zhead:=0		;;用于切换head 和txt的标志
+global zbold=0			;;用于加粗红色等字体,且默认字体不加粗
 
 ::zh::
 :*:/head::
@@ -203,6 +204,11 @@ return
 ::/cb::
 LControl & q::
 ToolTip,黑色,A_CaretX,A_CaretY-20
+if(zbold==1)
+{
+		zbold=0
+		Send,^b
+}
 MouseGetPos xpos,ypos
 sleep 50
 MouseClick,,820,263
@@ -219,6 +225,11 @@ return
 ::/cq::
 LControl & w::
 ToolTip,青色,A_CaretX,A_CaretY-20
+if(zbold==0)
+{
+		zbold=1
+		Send,^b
+}
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
@@ -236,6 +247,11 @@ return
 ::/cg::
 LControl & e::
 ToolTip,绿色,A_CaretX,A_CaretY-20
+if(zbold==0)
+{
+		zbold=1
+		Send,^b
+}
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
@@ -250,6 +266,11 @@ return
 ::/cr::
 LControl & r::
 ToolTip,红色,A_CaretX,A_CaretY-20
+if(zbold==0)
+{
+		zbold=1
+		Send,^b
+}
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
@@ -268,7 +289,18 @@ return
 ;Send {tab}{tab}13{enter}
 ;return
 
-
+^b::
+ToolTip ,加粗,A_CaretX,A_CaretY-20
+Send,^b
+if(zbold==1)
+{
+		zbold=0
+}
+else
+{
+		zbold=1
+}
+return
 
 ^[::
 Send, ^+m
