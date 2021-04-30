@@ -201,14 +201,19 @@ MouseClick,,1500,363	;1*2的表格
 MouseMove,xpos,ypos
 return
 
-::/cb::
+
+::*b::
+ToolTip,切换加粗,A_CaretX,A_CaretY-20
+send,^b
+Sleep 100
+ToolTip
+return 
+
+
+
+::*q::
 LControl & q::
 ToolTip,黑色,A_CaretX,A_CaretY-20
-if(zbold==1)
-{
-		zbold=0
-		Send,^b
-}
 MouseGetPos xpos,ypos
 sleep 50
 MouseClick,,820,263
@@ -222,63 +227,67 @@ return
 
 
 
-::/cq::
-LControl & w::
-ToolTip,青色,A_CaretX,A_CaretY-20
-if(zbold==0)
-{
-		zbold=1
-		Send,^b
-}
-MouseGetPos xpos,ypos
-Sleep 50
-MouseClick,,820,263
-Sleep 100
-MouseClick,,858,536	;qingse
-sleep 100
-MouseClick,,198,238
-Sleep 100
-Send,{Enter}
-sleep 100
-MouseMove,xpos,ypos
-ToolTip
-return 
-
-::/cg::
+::*e::
 LControl & e::
-ToolTip,绿色,A_CaretX,A_CaretY-20
-if(zbold==0)
-{
-		zbold=1
-		Send,^b
-}
+ToolTip,绿色+加粗,A_CaretX,A_CaretY-20
+
+;MouseGetPos xpos,ypos
+;Sleep 50
+;MouseClick,,820,263
+;Sleep 100
+;MouseClick,, 858,536	;qingse
+;sleep 100
+;MouseClick,, 159,233 ;198,238
+;Sleep 50
+;Send,{Enter}
+;sleep 50
+;MouseMove,xpos,ypos
+
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
 Sleep 100
-MouseClick,,1138,460	;green
+MouseClick,, 1140,470  ;1138,460	;green
 sleep 200
 ;send,{space}
 MouseMove,xpos,ypos
+
+
 ToolTip
 return 
 
-::/cr::
-LControl & r::
-ToolTip,红色,A_CaretX,A_CaretY-20
-if(zbold==0)
-{
-		zbold=1
-		Send,^b
-}
+::*w::
+LControl & w::
+ToolTip,蓝色+加粗,A_CaretX,A_CaretY-20
+
+;Send,^b
 MouseGetPos xpos,ypos
 Sleep 50
 MouseClick,,820,263
 Sleep 100
-MouseClick,,1030,499	;red
+MouseClick,, 886,436  ;1138,460	;green
 sleep 200
 ;send,{space}
 MouseMove,xpos,ypos
+;send **
+;send {Left}
+ToolTip
+return 
+
+::*r::
+LControl & r::
+ToolTip,红色+加粗,A_CaretX,A_CaretY-20
+Send,^b
+MouseGetPos xpos,ypos
+Sleep 50
+MouseClick,,820,263
+Sleep 100
+MouseClick,,1069,471	;red
+sleep 200
+;send,{space}
+MouseMove,xpos,ypos
+;send **
+;send {Left}
 ToolTip
 return 
 
@@ -292,14 +301,9 @@ return
 ^b::
 ToolTip ,加粗,A_CaretX,A_CaretY-20
 Send,^b
-if(zbold==1)
-{
-		zbold=0
-}
-else
-{
-		zbold=1
-}
+
+zbold=0
+ToolTip
 return
 
 ^[::
